@@ -1,0 +1,86 @@
+\documentclass[a4paper,14pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsfonts,amsmath,cite,enumerate,float,indentfirst}
+\usepackage[english, russian]{babel}
+\usepackage[dvips]{graphicx}
+\usepackage{multirow}
+\graphicspath{{images/}}
+\usepackage{geometry} % Меняем поля страницы
+\geometry{left=2cm}% левое поле
+\geometry{right=2cm}% правое поле
+\geometry{top=2cm}% верхнее поле
+\geometry{bottom=2cm}% нижнее поле
+
+\begin{document}
+\begin{titlepage}
+\newpage
+
+\begin{center}
+Министерство науки и высшего образования Российской Федерации\\
+% \vspace{3em}
+Федеральное государственное автономное образовательное учреждение высшего образования\\
+«Национальный исследовательский университет ИТМО»\\
+Факультет информационных технологий и программирования\\
+\end{center}
+
+\vspace{\fill}
+% \vspace{28em}
+
+\begin{center}
+\textbf{Лабораторная работа №\#}\\
+\textit{Название лабораторной работы}
+\end{center}
+
+\vspace{\fill}
+% \vspace{20em}
+
+\newbox{\lbox}
+\savebox{\lbox}{\hbox{Шайдулин Михаил Андреевич}}
+\newlength{\maxl}
+\setlength{\maxl}{\wd\lbox}
+\hfill\parbox{14cm}{
+\hspace*{5cm}Выполнил студент:\hfill\hbox to\maxl{Шайдулин Михаил Андреевич \hfill}\\
+\hspace*{5cm}Группа:\hfill\hbox to\maxl{M3106}\\
+}
+
+
+\vspace{8em}
+% \vspace{\fill}
+
+\begin{center}
+Санкт-Петербург \\2021
+\end{center}
+
+\end{titlepage}
+
+
+\section*{Цель работы:}
+text
+\section*{Ход работы:}
+
+\section{Таблица трассировки}
+\begin{tabular}{llllllllll}
+    \hline
+    \multicolumn{2}{l}{
+    \multirow{1}{10em}{\textbf{Выполняемая команда}}} &
+    \multicolumn{6}{l}{
+    \multirow{1}{15em}{\textbf{Содержимое регистров после выполнения команды}}} &
+    \multicolumn{2}{l}{
+    \multirow{1}{11em}{\textbf{Ячейка, содержимое которой изменилось после выполнения команды}}}\\
+    \\\\\\
+    \hline
+    Адрес & Код & CK & PA & РК & РД & А & C & Адрес & Новый код\\
+    019 & F200 &  &  &  &  &  &  &  &  \\
+    01A & 4016 &  &  &  &  &  &  &  &  \\
+    01B & 4017 &  &  &  &  &  &  &  &  \\
+    01C & B020 &  &  &  &  &  &  &  &  \\
+    01D & F200 &  &  &  &  &  &  &  &  \\
+    01E & 3018 &  &  &  &  &  &  &  &  \\
+    01F & F000 &  &  &  &  &  &  &  &  \\
+    020 & 4016 &  &  &  &  &  &  &  &  \\
+    021 & 3018 &  &  &  &  &  &  &  &  \\
+    022 & C01F &  &  &  &  &  &  &  &  \\
+    \hline
+\end{tabular}
+
+\end{document}

@@ -1,0 +1,115 @@
+\documentclass[a4paper,14pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsfonts,amsmath,cite,enumerate,float,indentfirst}
+\usepackage[english, russian]{babel}
+\usepackage[dvips]{graphicx}
+\usepackage{multirow}
+\graphicspath{{images/}}
+\usepackage{geometry} % Меняем поля страницы
+\geometry{left=2cm}% левое поле
+\geometry{right=2cm}% правое поле
+\geometry{top=2cm}% верхнее поле
+\geometry{bottom=2cm}% нижнее поле
+
+\begin{document}
+\begin{titlepage}
+\newpage
+
+\begin{center}
+Министерство науки и высшего образования Российской Федерации\\
+% \vspace{3em}
+Федеральное государственное автономное образовательное учреждение высшего образования\\
+«Национальный исследовательский университет ИТМО»\\
+Факультет информационных технологий и программирования\\
+\end{center}
+
+\vspace{\fill}
+% \vspace{28em}
+
+\begin{center}
+\textbf{Лабораторная работа №2}\\
+\textit{Исследование работы ЭВМ при выполнении разветвляющихся программ.}
+\end{center}
+
+\vspace{\fill}
+% \vspace{20em}
+
+\newbox{\lbox}
+\savebox{\lbox}{\hbox{Шайдулин Михаил Андреевич}}
+\newlength{\maxl}
+\setlength{\maxl}{\wd\lbox}
+\hfill\parbox{14cm}{
+\hspace*{5cm}Выполнил студент:\hfill\hbox to\maxl{Шайдулин Михаил Андреевич \hfill}\\
+\hspace*{5cm}Группа:\hfill\hbox to\maxl{M3106}\\
+}
+
+
+\vspace{8em}
+% \vspace{\fill}
+
+\begin{center}
+Санкт-Петербург \\2021
+\end{center}
+
+\end{titlepage}
+
+
+\section*{Цель работы:}
+Изучение команд переходов, способов организации
+разветвляющихся программ и исследование порядка функционирования ЭВМ при
+выполнении таких программ.
+\section*{Ход работы:}
+
+\section{Восстановить текст программы}
+
+\begin{tabular}{|c|c|c|l|}
+\hline
+\textbf{Адрес} & \textbf{Код команды} & \textbf{Мнемоника} & \textbf{Комментарий} \\\hline
+016 & CF0B & BR M & M $\to$ CK \\
+017 & F0F5 &  &  \\
+018 & F000 & HLT &  \\
+019 & +F200 & CLA & 0 $\to$ A \\
+01A & 4016 & ADD M & (M) + (A) $\to$ A \\
+01B & 4017 & ADD M & (M) + (A) $\to$ A \\
+01C & B020 & BEQ M & Если (A) и (C) = 0, то M $\to$ CK \\
+01D & F200 & CLA & 0 $\to$ A \\
+01E & 3018 & MOV M & (A) $\to$ M \\
+01F & F000 & HLT &  \\
+020 & 4016 & ADD M & (M) + (A) $\to$ A \\
+021 & 3018 & MOV M & (A) $\to$ M \\
+022 & C01F & BR M & M $\to $ CK \\
+023 & 0000 &  &\\
+\hline
+\end{tabular}
+
+\section{Заполнить таблицу трассировки, выполняя за базовую ЭВМ заданный вариант программы.}
+\begin{tabular}{ll|l|l|l|l|l|l|l|l}
+    \hline
+    \multicolumn{2}{l}{
+    \multirow{1}{10em}{\textbf{Выполняемая команда}}} &
+    \multicolumn{6}{l}{
+    \multirow{1}{15em}{\textbf{Содержимое регистров после выполнения команды}}} &
+    \multicolumn{2}{l}{
+    \multirow{1}{11em}{\textbf{Ячейка, содержимое которой изменилось после выполнения команды}}}\\
+    \\\\\\
+    \hline
+    Адрес & Код & CK & PA & РК & РД & А & C & Адрес & Новый код\\
+    019 & F200 & 01A & 019 & F200 & F200 & 0000 &  &  &  \\
+    01A & 4016 & 01B & 016 & 4016 & CF0B & CF0B & 0 &  \\
+    01B & 4017 & 01C & 017 & 4017 & F0F5 & C000 & 0 & &\\
+    01C & B020 & 01D & 01C & B020 & B020 & C000 & 1 &  &\\
+    01D & F200 & 01E & 01D & F200 & F200 & 0000 & 1 &  &\\
+    01E & 3018 & 01F & 018 & 3018 & 0000 & 0000 & 1 &  018 & 0000 \\
+    01F & F000 & 020 & 01F & F000 & F000 & 0000 & 1 &  &\\
+    \hline
+\end{tabular}
+
+\section{Описание программы}
+Складываем 2 числа. Если сумма равна 0, то записываем результат в ячейку 018 и завершаем программу. В противном случаем обнуляем аккумулятор и заносим в 018 содержимое аккумулятора \textit{\textbf{(CF0B)}}.\\
+
+\noindent
+\textbf{019-022} - область выполения команд\\
+\textbf{016-017} – область используемых данных\\
+\textbf{018} – результат
+
+\end{document}
